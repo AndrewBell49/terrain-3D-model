@@ -1,6 +1,5 @@
 # Written by Andrew Bell in 2023
-# https://getoutside.ordnancesurvey.co.uk/guides/beginners-guide-to-grid-references/
-# Good guide to understanding how os grid references work
+# Data got from https://osdatahub.os.uk/downloads/open/Terrain50
 # Program to get os grid reference coordinates, convert to a numpy array, then make a Terrain model
 
 import os
