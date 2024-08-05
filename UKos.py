@@ -26,7 +26,7 @@ def unzipAll():
 
 # national grid squares are in separate folders
 def getNationalGrid():
-    pathToSquares = f"{os.path.dirname(os.path.abspath(__file__))}\\WholeMapElevations\\data"
+    pathToSquares = f"{os.path.dirname(os.path.abspath(__file__))}\\UK\\data"
     nationalGrid = os.listdir(pathToSquares)
     return nationalGrid, pathToSquares
 
