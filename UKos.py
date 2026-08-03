@@ -139,10 +139,14 @@ def getEndAndBegin(count, height, top, bottom):
 
 # when full row is finished, add to the terrain structure
 def addRowToTerrain(row, terrain):
-    for j in range(np.shape(row)[0]):
-        for i in range(np.shape(row)[1]):
-            terrain = np.append(terrain, [row[j, i]], axis=0)
-    return terrain
+    # Flatten the row dimensions [rowHeight, width, 3] down to [points, 3]
+    flattened_row = row.reshape(-1, 3)
+    
+    # If terrain is empty, return the row, otherwise concatenate once
+    if terrain.shape[0] == 0:
+        return flattened_row
+    
+    return np.concatenate((terrain, flattened_row), axis=0)
 
 # makes the terrain from the top left and bottom right grid reference
 def makeTerrain(topLeft, bottomRight, zScale):
@@ -217,15 +221,15 @@ def saveTerrain(topLeft, bottomRight, fileName, zScale=2):
     hours = int(estimatedTimeSeconds/3600)
     minutes = int((estimatedTimeSeconds-(hours*3600))/60)
     seconds = estimatedTimeSeconds - minutes*60 - hours*3600
-    print(f"Estimated time: {hours}:{minutes}:{seconds}")
+    print(f"Estimated time: {hours}:{minutes}:{seconds} for {numOfPoints} points")
 
     terrain = Terrain(width, height, terrainPoints)
 
     terrain.saveFile(fileName)
 
 if __name__ == "__main__":
-    topLeft = ("NY", 31838, 18230)
-    bottomRight = ("NY", 41446, 5445)
+    topLeft = ("NY", 71, 41127)
+    bottomRight = ("SD", 65132, 72417)
     zScale = 2
-    fileName = "Helvellyn"
+    fileName = "TheLakes"
     saveTerrain(topLeft, bottomRight, fileName, zScale)
